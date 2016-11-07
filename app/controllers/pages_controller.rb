@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
 
+  def home
+  end
+
   def game
     @grid = Array.new(9) { ('A'..'Z').to_a[rand(26)] }
     @start_time = Time.now
@@ -10,18 +13,22 @@ class PagesController < ApplicationController
     attempt = params[:attempt]
     grid = params[:grid].split("")
     translation = translate(attempt)
+    score = (attempt.length.fdiv(time) * 10).round(2)
 
     @results = {
       attempt: attempt.upcase,
       time: time.round(2),
       translation: translation.nil? ? "" : translation.upcase,
-      score: (attempt.length.fdiv(time) * 10) .round(2),
+      score: score,
       message: "well done"
     }
 
     @results[:message] = "not an english word" if translation.nil?
     @results[:message] = "not in the grid" unless in_grid?(attempt, grid)
     @results[:score] = 0 unless @results[:message] == "well done"
+    session[:scores] << @results[:score]
+    @results[:scores] = session[:scores]
+    @results[:average_score] = session[:scores].reduce(:+).fdiv(session[:scores].length).round(2)
   end
 
 

@@ -6,4 +6,14 @@
 <p>Your score: <strong><%= @results[:score] %></strong></p>
 <p><strong><%= @results[:message] %></strong></p>
 
+<h3>Game history</h3>
+
+<p>Average score: <strong><%= @results[:average_score] %></strong></p>
+<ul>
+  <% @results[:scores].each_with_index do |score, index| %>
+    <li>Game <%= index + 1 %> | <strong><%= score %></strong></li>
+  <% end %>
+</ul>
+
 <button><%= link_to "Play again", game_path %></button>
+<button><%= link_to "Log out", destroy_path %></button>

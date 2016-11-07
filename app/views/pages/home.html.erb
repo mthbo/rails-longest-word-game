@@ -1,0 +1,8 @@
+<h1>Welcome to the longest word-game!</h1>
+
+<% if session[:current_user_id].nil? %>
+  <button><%= link_to "Log in", login_path %></button>
+<% else %>
+  <button><%= link_to "Play !", game_path %></button>
+  <button><%= link_to "Log out", destroy_path %></button>
+<% end %>
