@@ -1,0 +1,9 @@
+<h1> Score </h1>
+
+<p>Your word: <strong><%= @results[:attempt] %></strong></p>
+<p>Time Taken to answer: <strong><%= @results[:time] %> s</strong></p>
+<p>Translation: <strong><%= @results[:translation] %></strong></p>
+<p>Your score: <strong><%= @results[:score] %></strong></p>
+<p><strong><%= @results[:message] %></strong></p>
+
+<button><%= link_to "Play again", game_path %></button>
